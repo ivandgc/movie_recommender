@@ -7,7 +7,7 @@ movies = []
 end
 
 movies.each do |movie|
-	genres = "/" + movie["genre_ids"].join("/") + "/"
+	genres = movie["genre_ids"].join("/")
 	Movie.create(title: movie["title"],
 				 poster_path: movie["poster_path"],
 				 overview: movie["overview"],
