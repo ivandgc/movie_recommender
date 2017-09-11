@@ -11,6 +11,8 @@ require "action_view/railtie"
 require "action_cable/engine"
 require 'rest-client'
 require 'json'
+require 'nokogiri'
+require 'jwt'
 
 # require "sprockets/railtie"
 # require "rails/test_unit/railtie"

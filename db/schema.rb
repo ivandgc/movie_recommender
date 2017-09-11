@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20170907204929) do
     t.string "poster_path"
     t.string "overview"
     t.string "release_date"
-    t.float "rating"
+    t.string "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
