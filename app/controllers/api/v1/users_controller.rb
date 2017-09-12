@@ -6,43 +6,36 @@ class Api::V1::UsersController < ApplicationController
     if @user.save
       payload = {user_id: @user.id}
 
-      render json: {user: @user, jwt: issue_token(payload), success: "Welcome #{@user.username} to Movie Recommender!"}
+      render json: {user: @user, jwt: issue_token(payload)}
     else
-      byebug
-      render json: @user.errors.messages
+      ## send some error message
     end
   end
 
   def my_movies
-      render json: {movies: current_user.movies, user: current_user}
+      render json: current_user.movies
   end
 
   def add_movie
      user = current_user
+     
      movie = Movie.find_by(id: params[:movie])
-    
-     responseObj = {user: user, 
-                    movies: user.movies}
+     watched_movie = WatchedMovie.new(user: user, movie: movie)
 
 
-    if user.movies.include?(movie)
-      responseObj[:message] = "'#{movie.title}' is already in your list!"
+    if watched_movie.valid?
+      user.movies << movie
+      user.save
+      render json: {user: user}
     else
-       user.movies << movie
-      if user.save
-        responseObj[:message] = "'#{movie.title}' successfully saved to your account!"
-      else
-        responseObj[:message] = "Oops! Something went wrong! '#{movie.title}' was not saved to your account!"
-      end
+      render json: {message: "Movie not Saved"}
     end
-
-    render json: responseObj
 
   end
 
   def show
 
-    render json: {user: current_user, movies: current_user.movies}
+    render json: current_user
   end
 
 
