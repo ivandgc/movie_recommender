@@ -7,6 +7,7 @@ class Api::V1::AuthController < ApplicationController
       token = issue_token(payload)
       render json: {user: user, jwt: token}
     else
+    	render json: {message: "Signin failed! Invalid username or password!"}
     end
   end
 end

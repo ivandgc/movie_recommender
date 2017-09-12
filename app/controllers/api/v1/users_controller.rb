@@ -8,7 +8,6 @@ class Api::V1::UsersController < ApplicationController
 
       render json: {user: @user, jwt: issue_token(payload), success: "Welcome #{@user.username} to Movie Recommender!"}
     else
-      byebug
       render json: @user.errors.messages
     end
   end
