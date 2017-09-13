@@ -2,7 +2,7 @@
 pages = 40
 movies = []
 
-(1...39).to_a.each do |x|
+(81...120).to_a.each do |x|
 	movies.concat(JSON.parse(RestClient.get("https://api.themoviedb.org/3/discover/movie?api_key=de37d8ef6879dae3df30b07a16be01e7&page=" + x.to_s))["results"])
 end
 
